@@ -1,0 +1,13 @@
+# Window capture
+pywin32>=306
+Pillow>=10.0.0
+
+# OCR
+pytesseract>=0.3.10
+easyocr>=1.7.0
+
+# Translation
+deep-translator>=1.11.4
+
+# GUI
+customtkinter>=5.2.0
