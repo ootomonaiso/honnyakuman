@@ -1,1 +1,36 @@
-/.venv
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+
+# Distribution / packaging
+build/
+dist/
+*.spec
+*.egg-info/
+
+# PyInstaller
+*.manifest
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# EasyOCR models (downloaded at runtime)
+~/.EasyOCR/
+
+# Temporary files
+*.tmp
+*.bak

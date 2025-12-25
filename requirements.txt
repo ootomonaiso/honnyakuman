@@ -11,3 +11,6 @@ deep-translator>=1.11.4
 
 # GUI
 customtkinter>=5.2.0
+
+# Build (optional)
+pyinstaller>=6.0.0

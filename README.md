@@ -86,14 +86,30 @@ translate/
 
 ### OCRエンジン
 
-| エンジン | 特徴 | 初回起動 |
-|---------|------|---------|
-| Tesseract | 軽量・高速・要インストール | 即座に使用可能 |
-| EasyOCR | 高精度・Deep Learning | モデルダウンロード（約100MB） |
+| エンジン | 特徴 | GPU対応 | 初回起動 |
+|---------|------|---------|---------|
+| EasyOCR | 高精度・推奨 | ✅ | モデルダウンロード（約100MB） |
+| Tesseract | 軽量・要インストール | ❌ | 即座に使用可能 |
 
 ### キャプチャ間隔
-- 1〜10秒の間で調整可能
-- 自動キャプチャ時に使用
+- 0.5〜5秒の間で調整可能
+- GPU使用時は0.5秒でもサクサク動作
+
+### 高速モード
+- 画像を縮小して処理（デフォルトON）
+- 認識精度を少し犠牲にして速度向上
+
+### オーバーレイ機能
+- 翻訳結果を常に最前面に表示
+- ドラッグで移動可能
+- リサイズ可能
+
+## 🚀 パフォーマンス
+
+| 環境 | 処理時間（目安） |
+|------|-----------------|
+| CPU のみ | 3〜5秒 |
+| NVIDIA GPU (RTX 40系) | 0.3〜0.5秒 |
 
 ## 🔧 トラブルシューティング
 
@@ -101,17 +117,44 @@ translate/
 ```
 TesseractNotFoundError: tesseract is not installed
 ```
-→ Tesseract-OCRをインストールし、パスが通っているか確認
+→ EasyOCRを使用するか、Tesseract-OCRをインストール
 
 ### EasyOCRが遅い
-初回起動時はモデルのダウンロードに時間がかかります。2回目以降は高速です。
+- 初回起動時はモデルのダウンロードに時間がかかります
+- NVIDIA GPUがある場合はCUDA版PyTorchをインストール
+- 「高速モード」をONにする
+
+### GPUが認識されない
+```powershell
+# 確認コマンド
+python -c "import torch; print(torch.cuda.is_available())"
+```
+→ CUDA版PyTorchを再インストール
 
 ### 文字認識の精度が悪い
 - ウィンドウのフォントサイズを大きくする
-- EasyOCRを試す
+- 高速モードをOFFにする
 - コントラストの高い表示設定を使用する
 
-## 📝 ライセンス
+## � ビルド & リリース
+
+### ローカルでビルド
+```powershell
+# PyInstallerでexe化
+python build.py
+# → dist/WindowTranslator/WindowTranslator.exe が生成される
+```
+
+### GitHub Releasesに公開
+```powershell
+# タグを作成してプッシュすると自動でビルド＆リリース
+git tag v1.0.0
+git push origin v1.0.0
+```
+
+または、GitHub Actions の「Run workflow」から手動実行も可能です。
+
+## �📝 ライセンス
 
 MIT License
 
