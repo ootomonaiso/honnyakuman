@@ -147,7 +147,6 @@ python build.py
 
 ### GitHub Releasesに公開
 ```powershell
-# タグを作成してプッシュすると自動でビルド＆リリース
 git tag v1.0.0
 git push origin v1.0.0
 ```
