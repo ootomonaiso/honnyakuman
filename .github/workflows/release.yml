@@ -33,17 +33,15 @@ jobs:
       
       - name: Build executable
         run: |
-          pyinstaller --noconfirm --onedir --windowed --name "WindowTranslator" --icon "assets/icon.ico" --add-data "src;src" main.py
-        continue-on-error: true
-      
-      - name: Build executable (without icon)
-        if: failure()
-        run: |
           pyinstaller --noconfirm --onedir --windowed --name "WindowTranslator" --add-data "src;src" main.py
+      
+      - name: List dist contents
+        run: |
+          Get-ChildItem -Path dist -Recurse | Select-Object FullName
       
       - name: Create archive
         run: |
-          Compress-Archive -Path "dist/WindowTranslator/*" -DestinationPath "WindowTranslator-${{ github.ref_name || inputs.version }}-win64.zip"
+          Compress-Archive -Path "dist\WindowTranslator\*" -DestinationPath "WindowTranslator-${{ github.ref_name || inputs.version }}-win64.zip"
       
       - name: Upload artifact
         uses: actions/upload-artifact@v4
